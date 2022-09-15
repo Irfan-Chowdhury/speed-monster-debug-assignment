@@ -2,15 +2,19 @@ const histories = document.getElementById("histories");
 
 function addHistory(questionText, timeTaken, errorCount) {
   const newRow = document.createElement("div");
-  newRow.classList.add("card");
+  newRow.classList.add("col-md-4");
 
   newRow.innerHTML = `
-  <h3>${questionText}</h3>
-  <div>
-  <p>You took: <span class="bold">${timeTaken}</span> seconds</p>
-  <p>You made <span class="bold red">${errorCount}</span> mistakes</p>
-  </div>
+    <div class="card">
+        <div class="card-body">
+          <h4>${questionText}</h4>
+          <p>You took: <span class="bold">${timeTaken}</span> seconds</p>
+          <p>You made <span class="bold red">${errorCount}</span> mistakes</p>
+        </div>
+    </div>
   `;
+
+
 
   histories.appendChild(newRow);
 
@@ -29,19 +33,12 @@ function displayHistory() {
     // const newRow = document.createElement("div");
     // newRow.classList.add("card");
     const newRow = document.createElement("div");
-    newRow.classList.add("col-md-3");
-
-
-  //   newRow.innerHTML = `
-  //   <h3>${test.questionText}</h3>
-  //   <p>You took: <span class="bold">${test.timeTaken}</span> seconds</p>
-  //   <p>You made <span class="bold red">${test.errorCount}</span> mistakes</p>
-  // `;
+    newRow.classList.add("col-md-4");
 
     newRow.innerHTML = `
       <div class="card">
         <div class="card-body">
-          <h3>${test.questionText}</h3>
+          <h4>${test.questionText}</h4>
           <p>You took: <span class="bold">${test.timeTaken}</span> seconds</p>
           <p>You made <span class="bold red">${test.errorCount}</span> mistakes</p>
         </div>

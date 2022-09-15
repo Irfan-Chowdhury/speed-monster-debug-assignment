@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        #1 Difference between local storage and session storage
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <strong>Local Storage:</strong>
+                         This read-only interface property provides access to the Document’s local storage object, the stored data is stored across browser sessions. Similar to sessionStorage, except that localStorage data gets cleared when the page session ends – that is when the page is closed. It is cleared when the last “private” tab of a browser is closed (localStorage data for a document loaded in a private browsing or incognito session).
+
+                            DOMStrings are storage formats that use UTF-16 to encode data, which uses two bytes per character. Strings are automatically generated from integer keys just as they are for objects. The data stored in LocalStorage is specific to a protocol in the document. If the site is loaded over HTTP (e.g., http://example.com), localStorage returns a different object than if it is loaded over HTTPS (e.g., https://abc.com).
+                            
+                            If a document is loaded from a file: URL (that is, directly from the user’s local file system instead of being loaded from the server) the requirements for behavior are undefined and may vary among different browsers. Each file appears to be returned a different object by localStorage in all current browsers: URL. Essentially, it seems to be a case of each URL: file having its own unique local storage area.
+                            
+                            This behavior cannot be guaranteed because as mentioned above, the file: URL requirements remain unclear. As such, there’s a possibility that browsers may change how they handle files at any time. The way some browsers handle it has evolved.
+                        <br>
+                        <strong>Session Storage:</strong>
+                        Session Storage objects can be accessed using the sessionStorage read-only property. The difference between sessionStorage and localStorage is that localStorage data does not expire, whereas sessionStorage data is cleared when the page session ends.
+
+                            A unique page session gets created once a document is loaded in a browser tab. Page sessions are valid for only one tab at a time. Pages are only saved for the amount of time that the tab or the browser is open; they do not persist after the page reloads and restores. A new session is created each time a tab or window is opened; this is different from session cookies. Each tab/window that is opened with the same URL creates its own sessionStorage.When you duplicate a tab, the sessionStorage from the original tab is copied to the duplicated tab. Closing a window/tab ends the session and clears sessionStorage objects.
+
+                            A page’s protocol determines what data is stored in sessionStorage. Particularly, data stored by scripts accessed through HTTP (for example, http://abc.com) is stored in a separate object from the same site accessed through HTTPS (for instance, https://abc.com). A DOMString number is two bytes per character in UTF-16 DOMString format. Strings are automatically generated from integer keys just as they are for objects.
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        #2 Difference Global Scope and Block Scope
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <strong>The Local scope </strong>
+                            In contrast to global variables, locally scoped ones are only visible within the function they are declared. Each function written in JavaScript creates a new local scope and every variable declared in this scope is a local variable. That means that variables with the same name can be used in different functions. However, any effort to reference a local variable outside its scope will result in a Reference Error:
+                    <br>
+                        <strong>The Block scope </strong>
+                        So far, we’ve seen variables defined with the var keyword. Var can declare a variable either in the global or local scope. The variables that are declared within the block scope are comparable to local ones. They are available within the block that they are defined.
+
+                        The main difference between the local scope and block scope is that the block statements (e.g. if conditions or for loops), don't create a new scope. So the var keyword will not have an effect, because the variables are still in the same scope.                    
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        #3 How to work Javascript Event loop ?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        We’ll start with a somewhat of an odd claim — despite allowing async JavaScript code (like the setTimeout we just discussed), until ES6, JavaScript itself has actually never had any direct notion of asynchronicity built into it. The JavaScript engine has never done anything more than executing a single chunk of your program at any given moment.
+
+                            For more details on how JavaScript engines work (Google’s V8 specifically), check one of our previous articles on the topic.
+
+                            So, who tells the JS Engine to execute chunks of your program? In reality, the JS Engine doesn’t run in isolation — it runs inside a hosting environment, which for most developers is the typical web browser or Node.js. Actually, nowadays, JavaScript gets embedded into all kinds of devices, from robots to light bulbs. Every single device represents a different type of hosting environment for the JS Engine.
+
+                            The common denominator in all environments is a built-in mechanism called the event loop, which handles the execution of multiple chunks of your program over time, each time invoking the JS Engine.
+
+                            This means that the JS Engine is just an on-demand execution environment for any arbitrary JS code. It’s the surrounding environment that schedules the events (the JS code executions).
+
+                            So, for example, when your JavaScript program makes an Ajax request to fetch some data from the server, you set up the “response” code in a function (the “callback”), and the JS Engine tells the hosting environment:
+                            “Hey, I’m going to suspend execution for now, but whenever you finish with that network request, and you have some data, please call this function back.”
+
+                            The browser is then set up to listen for the response from the network, and when it has something to return to you, it will schedule the callback function to be executed by inserting it into the event loop.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        #3 Way of undefined
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        null, but also undefined, represent in JavaScript empty values. So what's the exact difference between them?
+
+                            The short answer is that JavaScript interpreter returns undefined when accessing a variable or object property that is not yet initialized. For example:
+
+                            let company;
+                            company;    // => undefined
+                            let person = { name: 'John Smith' };
+                            person.age; // => undefined
+
+                            let number;
+                            number;     // => undefined
+                            let movie = { name: 'Interstellar' };
+                            movie.year; // => undefined
+                            let movies = ['Interstellar', 'Alexander'];
+                            movies[3];  // => undefined
+
+                            The above example demonstrates that accessing:
+
+an uninitialized variable number
+a non-existing object property movie.year
+or a non-existing array element movies[3]
+are evaluated to undefined.
+
+The ECMAScript specification defines the type of undefined value:
+
+Undefined type is a type whose sole value is the undefined value.
+
+In this sense, typeof operator returns 'undefined' string for an undefined value:
+
+typeof undefined === 'undefined'; // => true
+Of course typeof works nicely to verify whether a variable contains an undefined value:
+
+let nothing;
+typeof nothing === 'undefined';   // => true
+
+Uninitialized variable
+A declared variable but not yet assigned with a value (uninitialized) is by default undefined.
+
+Plain and simple:
+
+let myVariable;
+myVariable; // => undefined
+myVariable is declared and not yet assigned with a value. Accessing the variable evaluates to undefined.
+
+An efficient approach to solve the troubles of uninitialized variables is whenever possible assign an initial value. The less the variable exists in an uninitialized state, the better.
+
+Ideally, you would assign a value right away after declaration const myVariable = 'Initial value'. But that's not always possible.
+
+Tip 1: Favor const, otherwise use let, but say goodbye to var
+
+In my opinion, one of the best features of ECMAScript 2015 is the new way to declare variables using const and let. It is a big step forward.
+
+const and let are block scoped (contrary to older function scoped var) and exist in a temporal dead zone until the declaration line.
+
+I recommend const variable when its value is not going to change. It creates an immutable binding.
+
+One of the nice features of const is that you must assign an initial value to the variable const myVariable = 'initial'. The variable is not exposed to the uninitialized state and accessing undefined is impossible.
+
+Let's check the function that verifies whether a word is a palindrome:
+
+function isPalindrome(word) {
+  const length = word.length;
+  const half = Math.floor(length / 2);
+  for (let index = 0; index < half; index++) {
+    if (word[index] !== word[length - index - 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+isPalindrome('madam'); // => true
+isPalindrome('hello'); // => false
+length and half variables are assigned with a value once. It seems reasonable to declare them as const since these variables aren't going to change.
+
+Use let declaration for variables whose value can change. Whenever possible assign an initial value right away, e.g. let index = 0.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
