@@ -26,14 +26,27 @@ function displayHistory() {
   const previousTests = JSON.parse(localStorage.getItem("testHistory")) || [];
 
   previousTests.forEach((test) => {
+    // const newRow = document.createElement("div");
+    // newRow.classList.add("card");
     const newRow = document.createElement("div");
-    newRow.classList.add("card");
+    newRow.classList.add("col-md-3");
+
+
+  //   newRow.innerHTML = `
+  //   <h3>${test.questionText}</h3>
+  //   <p>You took: <span class="bold">${test.timeTaken}</span> seconds</p>
+  //   <p>You made <span class="bold red">${test.errorCount}</span> mistakes</p>
+  // `;
 
     newRow.innerHTML = `
-  <h3>${test.questionText}</h3>
-  <p>You took: <span class="bold">${test.timeTaken}</span> seconds</p>
-    <p>You made <span class="bold red">${test.errorCount}</span> mistakes</p>
-  `;
+      <div class="card">
+        <div class="card-body">
+          <h3>${test.questionText}</h3>
+          <p>You took: <span class="bold">${test.timeTaken}</span> seconds</p>
+          <p>You made <span class="bold red">${test.errorCount}</span> mistakes</p>
+        </div>
+      </div>
+   `;
 
     histories.appendChild(newRow);
   });
