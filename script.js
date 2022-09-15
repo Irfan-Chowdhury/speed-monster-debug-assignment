@@ -24,8 +24,12 @@ const typeController = (e) => {
   const newLetter = e.key;
 
   // Handle backspace press
-  if (newLetter == "Backspace") {
+  if (newLetter === "Backspace") { 
     userText = userText.slice(0, userText.length - 1);
+    // if (userText.length > 0) {
+    //   errorCount++;
+    // }
+    // console.log(errorCount);
     return display.removeChild(display.lastChild);
   }
 
@@ -45,6 +49,7 @@ const typeController = (e) => {
   if (newLetterCorrect) {
     display.innerHTML += `<span class="green">${newLetter === " " ? "▪" : newLetter}</span>`;
   } else {
+    errorCount++;
     display.innerHTML += `<span class="red">${newLetter === " " ? "▪" : newLetter}</span>`;
   }
 
@@ -134,7 +139,7 @@ displayHistory();
 setInterval(() => {
   const currentTime = new Date().getTime();
   const timeSpent = (currentTime - startTime) / 1000;
-  console.log(parseInt(timeSpent));
+  // console.log(parseInt(timeSpent));
 
 
   document.getElementById("show-time").innerHTML =  `${startTime ? parseInt(timeSpent) : 0} seconds`;
